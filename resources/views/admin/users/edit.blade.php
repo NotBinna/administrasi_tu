@@ -42,8 +42,9 @@
 
             <select id="prodi_idProdi" name="prodi_idProdi" required class="block mt-1 w-full bg-gray-900 border border-gray-700 text-white rounded-md shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500">
                 <option value="" disabled selected>Pilih Program Studi</option>
-                <option {{ $user->prodi_idProdi == 1 ? 'selected' : '' }} value="1">Teknik Informatika</option>
-                <option {{ $user->prodi_idProdi == 2 ? 'selected' : '' }} value="2">Sistem Informasi</option>
+                @foreach($prodis as $id => $prodi)
+                    <option value="{{ $id }}" {{ $user->prodi_idProdi == $id ? 'selected' : '' }}>{{ $prodi }}</option>
+                @endforeach
             </select>
 
             <x-input-error :messages="$errors->get('prodi_idProdi')" class="mt-2" />
@@ -53,9 +54,9 @@
         <div class="mt-4">
             <x-input-label for="role_idRole" :value="__('Role')" />
             <select id="role_idRole" name="role_idRole" class="block mt-1 w-full dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 shadow-sm focus:ring focus:ring-indigo-500 dark:focus:ring-indigo-600">
-                <option value="1" {{ $user->role_idRole == 1 ? 'selected' : '' }}>Mahasiswa</option>
-                <option value="2" {{ $user->role_idRole == 2 ? 'selected' : '' }}>Kaprodi</option>
-                <option value="3" {{ $user->role_idRole == 3 ? 'selected' : '' }}>TU</option>
+                @foreach($roles as $id => $roleName)
+                    <option value="{{ $id }}" {{ $user->role_idRole == $id ? 'selected' : '' }}>{{ $roleName }}</option>
+                @endforeach
             </select>
             <x-input-error :messages="$errors->get('role_idRole')" class="mt-2" />
         </div>
@@ -69,5 +70,6 @@
                 {{ __('Update') }}
             </x-primary-button>
         </div>
+
     </form>
 </x-guest-layout>

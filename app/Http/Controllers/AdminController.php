@@ -21,7 +21,18 @@ class AdminController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('admin.users.edit', compact('user'));
+        $roles = [
+            1 => 'Mahasiswa',
+            2 => 'Kaprodi',
+            3 => 'TU',
+        ];
+
+        $prodis = [
+            1 => 'Teknik Informatika',
+            2 => 'Sistem Informasi',
+        ];
+
+        return view('admin.users.edit', compact('user', 'roles', 'prodis'));
     }
 
     public function update(Request $request, $id)
@@ -35,7 +46,7 @@ class AdminController extends Controller
         $user = User::findOrFail($id);
         $user->update($request->all());
 
-        return redirect()->route('admin.users')->with('success', 'User berhasil diperbarui.');
+        return redirect()->route('admin.users.index')->with('success', 'User berhasil diperbarui.');
     }
 }
 

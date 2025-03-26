@@ -1,16 +1,17 @@
 <?php
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\{ProfileController, Auth\RegisteredUserController, Auth\AuthenticatedSessionController, AdminController, SuratController};
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KaprodiController;
+
+
+
 
 // Halaman Utama
 Route::get('/', function () {
-    return view('welcome');
+    return view('welc');
 });
 
-// Auth Routes (Tanpa Middleware karena register dan login tidak perlu login dulu)
+// Auth Routes
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
@@ -42,6 +43,27 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/users/{id}', [AdminController::class, 'update'])->name('users.update');
         });
     });
+
+    // Kaprodi Routes
+    Route::middleware(['role:2'])->group(function () {
+        Route::get('/kaprodi/surat', [SuratController::class, 'index'])->name('kaprodi.surat.index');
+        Route::put('/kaprodi/surat/{id}/status', [KaprodiController::class, 'updateStatus'])->name('kaprodi.surat.updateStatus');
+    });
+
+    Route::get('/surat/create', [SuratController::class, 'create'])->name('surat.create');
+    Route::post('/surat/store', [SuratController::class, 'store'])->name('surat.store');
+    Route::get('/surat/{id}', [SuratController::class, 'show'])->name('surat.show');
+    Route::post('/surat/{surat}/upload', [SuratController::class, 'uploadSurat'])->name('surat.upload');
+    Route::get('/surat/{surat}/download', [SuratController::class, 'downloadSurat'])->name('surat.download');
+
+    // Resource paling bawah biar gak nabrak
+    Route::resource('surat', SuratController::class)->except(['create', 'store']);
+
+
+    // Kaprodi Controller
+    Route::put('/kaprodi/surat/{id}/status', [KaprodiController::class, 'updateStatus'])->name('kaprodi.surat.updateStatus');
 });
+
+// Surat Routes
 
 require __DIR__ . '/auth.php';
