@@ -11,8 +11,12 @@ class SuratController extends Controller
     // Menampilkan daftar surat
     public function index()
     {
-        $surats = Surat::all();
-        return view('kaprodi.surat.index', compact('surats'));
+        $aktif = Surat::with('mahasiswa')->where('jenis_surat', 'Aktif')->get();
+        $pengantar = Surat::with('mahasiswa')->where('jenis_surat', 'Pengantar')->get();
+        $lulus = Surat::with('mahasiswa')->where('jenis_surat', 'Lulus')->get();
+        $laporan = Surat::with('mahasiswa')->where('jenis_surat', 'Laporan')->get();
+
+        return view('kaprodi.surat.index', compact('aktif', 'pengantar', 'lulus', 'laporan'));
     }
 
     // Menampilkan form pengajuan surat (hanya mahasiswa)

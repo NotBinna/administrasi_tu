@@ -11,4 +11,9 @@ class Surat extends Model
     public $incrementing = true;
     protected $keyType = 'int';
     protected $guarded = [];
+
+    public function mahasiswa()
+    {
+        return $this->belongsTo(User::class, 'users_idUser', 'idUser');
+    }
 }

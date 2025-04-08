@@ -64,5 +64,11 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_idRole', 'idRole');
     }
 
+    public function surats()
+    {
+        return $this->hasMany(Surat::class, 'users_idUser', 'idUser');
+    }
+
+
 
 }

@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Admin Routes
     Route::prefix('admin')->name('admin.')->group(function () {
-        Route::middleware(['role:2,3'])->group(function () {
+        Route::middleware(['role:3'])->group(function () {
             Route::get('/users', [AdminController::class, 'index'])->name('users.index');
             Route::get('/users/{id}/edit', [AdminController::class, 'edit'])->name('users.edit');
             Route::put('/users/{id}', [AdminController::class, 'update'])->name('users.update');
