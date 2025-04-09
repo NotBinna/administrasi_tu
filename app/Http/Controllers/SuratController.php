@@ -11,12 +11,27 @@ class SuratController extends Controller
     // Menampilkan daftar surat
     public function index()
     {
-        $aktif = Surat::with('mahasiswa')->where('jenis_surat', 'Aktif')->get();
-        $pengantar = Surat::with('mahasiswa')->where('jenis_surat', 'Pengantar')->get();
-        $lulus = Surat::with('mahasiswa')->where('jenis_surat', 'Lulus')->get();
-        $laporan = Surat::with('mahasiswa')->where('jenis_surat', 'Laporan')->get();
+        $user = auth()->user();
 
-        return view('kaprodi.surat.index', compact('aktif', 'pengantar', 'lulus', 'laporan'));
+        if ($user->role_idRole == 1) {
+            $aktif = Surat::with('mahasiswa')->where('jenis_surat', 'Aktif')->where('users_idUser', $user->idUser)->get();
+            $pengantar = Surat::with('mahasiswa')->where('jenis_surat', 'Pengantar')->where('users_idUser', $user->idUser)->get();
+            $lulus = Surat::with('mahasiswa')->where('jenis_surat', 'Lulus')->where('users_idUser', $user->idUser)->get();
+            $laporan = Surat::with('mahasiswa')->where('jenis_surat', 'Laporan')->where('users_idUser', $user->idUser)->get();
+            return view('mahasiswa.surat.index', compact('aktif', 'pengantar', 'lulus', 'laporan'));
+        } elseif ($user->role_idRole == 3) {
+            $aktif = Surat::with('mahasiswa')->where('jenis_surat', 'Aktif')->where('status_surat', 'Disetujui')->get();
+            $pengantar = Surat::with('mahasiswa')->where('jenis_surat', 'Pengantar')->where('status_surat', 'Disetujui')->get();
+            $lulus = Surat::with('mahasiswa')->where('jenis_surat', 'Lulus')->where('status_surat', 'Disetujui')->get();
+            $laporan = Surat::with('mahasiswa')->where('jenis_surat', 'Laporan')->where('status_surat', 'Disetujui')->get();
+            return view('tu.surat.index', compact('aktif', 'pengantar', 'lulus', 'laporan'));
+        } else {
+            $aktif = Surat::with('mahasiswa')->where('jenis_surat', 'Aktif')->get();
+            $pengantar = Surat::with('mahasiswa')->where('jenis_surat', 'Pengantar')->get();
+            $lulus = Surat::with('mahasiswa')->where('jenis_surat', 'Lulus')->get();
+            $laporan = Surat::with('mahasiswa')->where('jenis_surat', 'Laporan')->get();
+            return view('kaprodi.surat.index', compact('aktif', 'pengantar', 'lulus', 'laporan'));
+        }
     }
 
     // Menampilkan form pengajuan surat (hanya mahasiswa)

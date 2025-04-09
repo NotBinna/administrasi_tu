@@ -4,11 +4,14 @@
             {{ __('Daftar Surat') }}
         </h2>
     </x-slot>
-    <div class="container text-white mt-4">
+    <div class="container text-white">
+        <a href="{{ route('surat.create') }}" class="mb-4 mt-3 inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+            Buat Surat
+        </a>
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
-            <table class="table mb-5">
+            <table class="table">
                 <h4>Surat Keterangan Mahasiswa Aktif</h4>
                 <thead>
                 <tr>
@@ -19,7 +22,6 @@
                     <th scope="col" class="px-6 py-3">Semester</th>
                     <th scope="col" class="px-6 py-3">Keperluan</th>
                     <th scope="col" class="px-6 py-3">Status</th>
-                    <th scope="col" class="px-6 py-3">Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,27 +43,13 @@
                             @endif
                             {{ $surat->status_surat }}
                         </td>
-                        <td>
-                            <form action="{{ route('kaprodi.surat.updateStatus', $surat->idSurat) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="status" value="Disetujui">
-                                <button type="submit" class="btn btn-success" @if($surat->status_surat === 'Disetujui') disabled @endif>Terima</button>
-                            </form>
-                            <form action="{{ route('kaprodi.surat.updateStatus', $surat->idSurat) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="status" value="Ditolak">
-                                <button type="submit" class="btn btn-danger" @if($surat->status_surat === 'Ditolak') disabled @endif>Tolak</button>
-                            </form>
-                        </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
 
 
-            <table class="table mb-5">
+            <table class="table">
                 <h4>Surat Pengantar Tugas Mata Kuliah</h4>
                 <thead>
                 <tr>
@@ -73,7 +61,6 @@
                     <th scope="col" class="px-6 py-3">Tujuan</th>
                     <th scope="col" class="px-6 py-3">Topik</th>
                     <th scope="col" class="px-6 py-3">Status</th>
-                    <th scope="col" class="px-6 py-3">Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -96,26 +83,12 @@
                             @endif
                             {{ $surat->status_surat }}
                         </td>
-                        <td>
-                            <form action="{{ route('kaprodi.surat.updateStatus', $surat->idSurat) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="status" value="Disetujui">
-                                <button type="submit" class="btn btn-success" @if($surat->status_surat === 'Disetujui') disabled @endif>Terima</button>
-                            </form>
-                            <form action="{{ route('kaprodi.surat.updateStatus', $surat->idSurat) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="status" value="Ditolak">
-                                <button type="submit" class="btn btn-danger" @if($surat->status_surat === 'Ditolak') disabled @endif>Tolak</button>
-                            </form>
-                        </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
 
-            <table class="table mb-5">
+            <table class="table">
                 <h4>Surat Keterangan Lulus</h4>
                 <thead>
                 <tr>
@@ -123,7 +96,6 @@
                     <th scope="col" class="px-6 py-3">NRP</th>
                     <th scope="col" class="px-6 py-3">Nama</th>
                     <th scope="col" class="px-6 py-3">Status</th>
-                    <th scope="col" class="px-6 py-3">Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -142,26 +114,12 @@
                             @endif
                             {{ $surat->status_surat }}
                         </td>
-                        <td>
-                            <form action="{{ route('kaprodi.surat.updateStatus', $surat->idSurat) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="status" value="Disetujui">
-                                <button type="submit" class="btn btn-success" @if($surat->status_surat === 'Disetujui') disabled @endif>Terima</button>
-                            </form>
-                            <form action="{{ route('kaprodi.surat.updateStatus', $surat->idSurat) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="status" value="Ditolak">
-                                <button type="submit" class="btn btn-danger" @if($surat->status_surat === 'Ditolak') disabled @endif>Tolak</button>
-                            </form>
-                        </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
 
-            <table class="table mb-5">
+            <table class="table">
                 <h4>Surat Laporan Hasil Studi</h4>
                 <thead>
                 <tr>
@@ -170,7 +128,6 @@
                     <th scope="col" class="px-6 py-3">Nama</th>
                     <th scope="col" class="px-6 py-3">Keperluan</th>
                     <th scope="col" class="px-6 py-3">Status</th>
-                    <th scope="col" class="px-6 py-3">Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -189,20 +146,6 @@
                                 <i class="fas fa-circle text-success f-10 me-1"></i>
                             @endif
                             {{ $surat->status_surat }}
-                        </td>
-                        <td>
-                            <form action="{{ route('kaprodi.surat.updateStatus', $surat->idSurat) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="status" value="Disetujui">
-                                <button type="submit" class="btn btn-success" @if($surat->status_surat === 'Disetujui') disabled @endif>Terima</button>
-                            </form>
-                            <form action="{{ route('kaprodi.surat.updateStatus', $surat->idSurat) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="status" value="Ditolak">
-                                <button type="submit" class="btn btn-danger" @if($surat->status_surat === 'Ditolak') disabled @endif>Tolak</button>
-                            </form>
                         </td>
                     </tr>
                 @endforeach

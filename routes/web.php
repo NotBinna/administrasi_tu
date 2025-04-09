@@ -30,6 +30,9 @@ Route::middleware(['auth'])->group(function () {
         }
     })->name('dashboard');
 
+    // Routes mahasiswa
+    Route::get('/mahasiswa/surat', [SuratController::class, 'index'])->name('mahasiswa.surat.index');
+
     // Profile Routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -56,14 +59,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/surat/{surat}/upload', [SuratController::class, 'uploadSurat'])->name('surat.upload');
     Route::get('/surat/{surat}/download', [SuratController::class, 'downloadSurat'])->name('surat.download');
 
-    // Resource paling bawah biar gak nabrak
-    Route::resource('surat', SuratController::class)->except(['create', 'store']);
-
-
-    // Kaprodi Controller
     Route::put('/kaprodi/surat/{id}/status', [KaprodiController::class, 'updateStatus'])->name('kaprodi.surat.updateStatus');
 });
 
-// Surat Routes
+    Route::resource('surat', SuratController::class)->except(['create', 'store']);
+
+
+
 
 require __DIR__ . '/auth.php';
