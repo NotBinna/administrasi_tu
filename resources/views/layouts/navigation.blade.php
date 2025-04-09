@@ -19,7 +19,7 @@
 
                 @if (Auth::user()->role_idRole == 3)
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
+                    <x-nav-link :href="route('tu.users.index')" :active="request()->routeIs('tu.users.index')">
                         {{ __('Users') }}
                     </x-nav-link>
                 </div>
@@ -34,6 +34,13 @@
                 @if(auth()->user()->role_idRole == 1)
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('mahasiswa.surat.index')" :active="request()->routeIs('mahasiswa.surat.index')">
+                            {{ __('Surat') }}
+                        </x-nav-link>
+                    </div>
+                @endif
+                @if(auth()->user()->role_idRole == 3)
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('tu.surat.index')" :active="request()->routeIs('tu.surat.index')">
                             {{ __('Surat') }}
                         </x-nav-link>
                     </div>

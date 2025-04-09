@@ -4,17 +4,14 @@
             {{ __('Daftar Surat') }}
         </h2>
     </x-slot>
-    <div class="container text-white">
-        <a href="{{ route('surat.create') }}" class="mb-4 mt-3 inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
-            Buat Surat
-        </a>
+    <div class="container text-white mt-4">
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
-            <table class="table">
+            <table class="table mb-5">
                 <h4>Surat Keterangan Mahasiswa Aktif</h4>
                 <thead>
-                <tr>
+                <tr class="bg-gray-400">
                     <th scope="col" class="px-6 py-3">ID</th>
                     <th scope="col" class="px-6 py-3">NRP</th>
                     <th scope="col" class="px-6 py-3">Nama</th>
@@ -22,6 +19,7 @@
                     <th scope="col" class="px-6 py-3">Semester</th>
                     <th scope="col" class="px-6 py-3">Keperluan</th>
                     <th scope="col" class="px-6 py-3">Status</th>
+                    <th scope="col" class="px-6 py-3">File</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,16 +41,25 @@
                             @endif
                             {{ $surat->status_surat }}
                         </td>
+                        <td>
+                            <input
+                                type="file"
+                                class="form-control"
+                                id="profile_picture"
+                                name="profile_picture"
+                                accept="application/pdf"
+                            />
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
 
 
-            <table class="table">
+            <table class="table mb-5">
                 <h4>Surat Pengantar Tugas Mata Kuliah</h4>
                 <thead>
-                <tr>
+                <tr class="bg-gray-400">
                     <th scope="col" class="px-6 py-3">ID</th>
                     <th scope="col" class="px-6 py-3">NRP</th>
                     <th scope="col" class="px-6 py-3">Nama</th>
@@ -88,10 +95,10 @@
                 </tbody>
             </table>
 
-            <table class="table">
+            <table class="table mb-5">
                 <h4>Surat Keterangan Lulus</h4>
                 <thead>
-                <tr>
+                <tr class="bg-gray-400">
                     <th scope="col" class="px-6 py-3">ID</th>
                     <th scope="col" class="px-6 py-3">NRP</th>
                     <th scope="col" class="px-6 py-3">Nama</th>
@@ -119,10 +126,10 @@
                 </tbody>
             </table>
 
-            <table class="table">
+            <table class="table mb-5">
                 <h4>Surat Laporan Hasil Studi</h4>
                 <thead>
-                <tr>
+                <tr class="bg-gray-400">
                     <th scope="col" class="px-6 py-3">ID</th>
                     <th scope="col" class="px-6 py-3">NRP</th>
                     <th scope="col" class="px-6 py-3">Nama</th>

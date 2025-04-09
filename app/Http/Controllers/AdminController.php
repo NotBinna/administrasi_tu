@@ -9,13 +9,13 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        return view('admin.dashboard');
+        return view('tu.dashboard');
     }
 
     public function index()
     {
         $users = User::with('role', 'prodi')->get();
-        return view('admin.users.index', compact('users'));
+        return view('tu.users.index', compact('users'));
     }
 
     public function edit($id)
@@ -32,7 +32,7 @@ class AdminController extends Controller
             2 => 'Sistem Informasi',
         ];
 
-        return view('admin.users.edit', compact('user', 'roles', 'prodis'));
+        return view('tu.users.edit', compact('user', 'roles', 'prodis'));
     }
 
     public function update(Request $request, $id)
@@ -46,7 +46,7 @@ class AdminController extends Controller
         $user = User::findOrFail($id);
         $user->update($request->all());
 
-        return redirect()->route('admin.users.index')->with('success', 'User berhasil diperbarui.');
+        return redirect()->route('tu.users.index')->with('success', 'User berhasil diperbarui.');
     }
 }
 

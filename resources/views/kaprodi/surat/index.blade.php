@@ -11,7 +11,7 @@
             <table class="table mb-5">
                 <h4>Surat Keterangan Mahasiswa Aktif</h4>
                 <thead>
-                <tr>
+                <tr class="bg-gray-400">
                     <th scope="col" class="px-6 py-3">ID</th>
                     <th scope="col" class="px-6 py-3">NRP</th>
                     <th scope="col" class="px-6 py-3">Nama</th>
@@ -19,7 +19,7 @@
                     <th scope="col" class="px-6 py-3">Semester</th>
                     <th scope="col" class="px-6 py-3">Keperluan</th>
                     <th scope="col" class="px-6 py-3">Status</th>
-                    <th scope="col" class="px-6 py-3">Aksi</th>
+                    <th scope="col" class="px-6 py-3">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -64,7 +64,7 @@
             <table class="table mb-5">
                 <h4>Surat Pengantar Tugas Mata Kuliah</h4>
                 <thead>
-                <tr>
+                <tr class="bg-gray-400">
                     <th scope="col" class="px-6 py-3">ID</th>
                     <th scope="col" class="px-6 py-3">NRP</th>
                     <th scope="col" class="px-6 py-3">Nama</th>
@@ -73,7 +73,7 @@
                     <th scope="col" class="px-6 py-3">Tujuan</th>
                     <th scope="col" class="px-6 py-3">Topik</th>
                     <th scope="col" class="px-6 py-3">Status</th>
-                    <th scope="col" class="px-6 py-3">Aksi</th>
+                    <th scope="col" class="px-6 py-3">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -118,12 +118,12 @@
             <table class="table mb-5">
                 <h4>Surat Keterangan Lulus</h4>
                 <thead>
-                <tr>
+                <tr class="bg-gray-400">
                     <th scope="col" class="px-6 py-3">ID</th>
                     <th scope="col" class="px-6 py-3">NRP</th>
                     <th scope="col" class="px-6 py-3">Nama</th>
                     <th scope="col" class="px-6 py-3">Status</th>
-                    <th scope="col" class="px-6 py-3">Aksi</th>
+                    <th scope="col" class="px-6 py-3">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -164,13 +164,13 @@
             <table class="table mb-5">
                 <h4>Surat Laporan Hasil Studi</h4>
                 <thead>
-                <tr>
+                <tr class="bg-gray-400">
                     <th scope="col" class="px-6 py-3">ID</th>
                     <th scope="col" class="px-6 py-3">NRP</th>
                     <th scope="col" class="px-6 py-3">Nama</th>
                     <th scope="col" class="px-6 py-3">Keperluan</th>
                     <th scope="col" class="px-6 py-3">Status</th>
-                    <th scope="col" class="px-6 py-3">Aksi</th>
+                    <th scope="col" class="px-6 py-3">Action</th>
                 </tr>
                 </thead>
                 <tbody>

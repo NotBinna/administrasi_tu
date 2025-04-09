@@ -11,10 +11,10 @@
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
-            <table class="table">
+            <table class="table mb-5">
                 <h4>Surat Keterangan Mahasiswa Aktif</h4>
                 <thead>
-                <tr>
+                <tr class="bg-gray-400">
                     <th scope="col" class="px-6 py-3">ID</th>
                     <th scope="col" class="px-6 py-3">NRP</th>
                     <th scope="col" class="px-6 py-3">Nama</th>
@@ -49,10 +49,10 @@
             </table>
 
 
-            <table class="table">
+            <table class="table mb-5">
                 <h4>Surat Pengantar Tugas Mata Kuliah</h4>
                 <thead>
-                <tr>
+                <tr class="bg-gray-400">
                     <th scope="col" class="px-6 py-3">ID</th>
                     <th scope="col" class="px-6 py-3">NRP</th>
                     <th scope="col" class="px-6 py-3">Nama</th>
@@ -88,10 +88,10 @@
                 </tbody>
             </table>
 
-            <table class="table">
+            <table class="table mb-5">
                 <h4>Surat Keterangan Lulus</h4>
                 <thead>
-                <tr>
+                <tr class="bg-gray-400">
                     <th scope="col" class="px-6 py-3">ID</th>
                     <th scope="col" class="px-6 py-3">NRP</th>
                     <th scope="col" class="px-6 py-3">Nama</th>
@@ -119,10 +119,10 @@
                 </tbody>
             </table>
 
-            <table class="table">
+            <table class="table mb-5">
                 <h4>Surat Laporan Hasil Studi</h4>
                 <thead>
-                <tr>
+                <tr class="bg-gray-400">
                     <th scope="col" class="px-6 py-3">ID</th>
                     <th scope="col" class="px-6 py-3">NRP</th>
                     <th scope="col" class="px-6 py-3">Nama</th>
