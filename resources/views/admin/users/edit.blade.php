@@ -5,7 +5,7 @@
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4 ms-4">Edit Pengguna</h2>
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 ">
-                    <form method="POST" action="{{ route('tu.users.update', $user->idUser) }}" class="">
+                    <form method="POST" action="{{ route('admin.users.update', $user->idUser) }}" class="">
                         @csrf
                         @method('PUT')
 
@@ -40,30 +40,33 @@
                         <!-- Program Studi -->
                         <div class="mt-4">
                             <x-input-label for="prodi_idProdi" :value="__('Program Studi')" />
-
-                            <select id="prodi_idProdi" name="prodi_idProdi" required class="block mt-1 w-full border border-gray-700  rounded-md shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500">
-                                <option value="" disabled selected>Pilih Program Studi</option>
-                                @foreach($prodis as $id => $prodi)
-                                    <option value="{{ $id }}" {{ $user->prodi_idProdi == $id ? 'selected' : '' }}>{{ $prodi }}</option>
+                            <select name="prodi_idProdi" class="form-control">
+                                <option value="">Pilih Program Studi</option>
+                                @foreach ($prodis as $prodi)
+                                    <option value="{{ $prodi->idProdi }}" {{ $user->prodi_idProdi == $prodi->idProdi ? 'selected' : '' }}>
+                                        {{ $prodi->nama_prodi }}
+                                    </option>
                                 @endforeach
                             </select>
-
                             <x-input-error :messages="$errors->get('prodi_idProdi')" class="mt-2" />
                         </div>
 
                         <!-- Role -->
                         <div class="mt-4">
                             <x-input-label for="role_idRole" :value="__('Role')" />
-                            <select id="role_idRole" name="role_idRole" class="block mt-1 w-full border border-gray-700  rounded-md shadow-sm focus:ring focus:ring-indigo-500 focus:border-indigo-500">
-                                @foreach($roles as $id => $roleName)
-                                    <option value="{{ $id }}" {{ $user->role_idRole == $id ? 'selected' : '' }}>{{ $roleName }}</option>
+                            <select name="role_idRole" class="form-control">
+                                <option value="">Pilih Role</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->idRole }}" {{ $user->role_idRole == $role->idRole ? 'selected' : '' }}>
+                                        {{ $role->role_name }}
+                                    </option>
                                 @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('role_idRole')" class="mt-2" />
                         </div>
 
                         <div class="flex items-center justify-between mt-4">
-                            <a class="btn btn-primary" href="{{ route('tu.users.index') }}" role="button">
+                            <a class="btn btn-primary" href="{{ route('admin.users.index') }}" role="button">
                                 &lt; {{ __('Back') }}
                             </a>
                             <button class="btn btn-primary" type="submit">

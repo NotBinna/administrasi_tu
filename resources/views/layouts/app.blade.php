@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Mantis') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -28,6 +28,8 @@
         <!-- [Template CSS Files] -->
         <link rel="stylesheet" href="{{ asset('css/style.css') }}" id="main-style-link" >
         <link rel="stylesheet" href="{{ asset('css/style-preset.css') }}" >
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -47,6 +49,37 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <script>
+            $(document).ready(function () {
+                $('#tabel-surat').DataTable({
+                    order: [], // default tanpa urutan
+                    language: {
+                        search: "Cari:",
+                        lengthMenu: "Tampilkan _MENU_ data",
+                        zeroRecords: "Data tidak ditemukan",
+                        info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+                        infoEmpty: "Tidak ada data tersedia",
+                        infoFiltered: "(difilter dari total _MAX_ data)",
+                        paginate: {
+                            first: "Pertama",
+                            last: "Terakhir",
+                            next: "Berikutnya",
+                            previous: "Sebelumnya"
+                        },
+                    }
+                });
+            });
+        </script>
+
+
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- DataTables -->
+        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
 
         <!-- [Page Specific JS] start -->
         <script src="{{ asset('js/plugins/apexcharts.min.js') }}"></script>

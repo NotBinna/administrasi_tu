@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Surat;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class SuratController extends Controller
 {
-    // Menampilkan daftar surat
     public function index()
     {
         $user = auth()->user();
+        $prodiId = $user->prodi_idProdi;
 
         if ($user->role_idRole == 1) {
             $aktif = Surat::with('mahasiswa')->where('jenis_surat', 'Aktif')->where('users_idUser', $user->idUser)->get();
@@ -19,22 +20,64 @@ class SuratController extends Controller
             $lulus = Surat::with('mahasiswa')->where('jenis_surat', 'Lulus')->where('users_idUser', $user->idUser)->get();
             $laporan = Surat::with('mahasiswa')->where('jenis_surat', 'Laporan')->where('users_idUser', $user->idUser)->get();
             return view('mahasiswa.surat.index', compact('aktif', 'pengantar', 'lulus', 'laporan'));
-        } elseif ($user->role_idRole == 3) {
-            $aktif = Surat::with('mahasiswa')->where('jenis_surat', 'Aktif')->where('status_surat', 'Disetujui')->get();
-            $pengantar = Surat::with('mahasiswa')->where('jenis_surat', 'Pengantar')->where('status_surat', 'Disetujui')->get();
-            $lulus = Surat::with('mahasiswa')->where('jenis_surat', 'Lulus')->where('status_surat', 'Disetujui')->get();
-            $laporan = Surat::with('mahasiswa')->where('jenis_surat', 'Laporan')->where('status_surat', 'Disetujui')->get();
-            return view('tu.surat.index', compact('aktif', 'pengantar', 'lulus', 'laporan'));
-        } else {
-            $aktif = Surat::with('mahasiswa')->where('jenis_surat', 'Aktif')->get();
-            $pengantar = Surat::with('mahasiswa')->where('jenis_surat', 'Pengantar')->get();
-            $lulus = Surat::with('mahasiswa')->where('jenis_surat', 'Lulus')->get();
-            $laporan = Surat::with('mahasiswa')->where('jenis_surat', 'Laporan')->get();
+        } elseif ($user->role_idRole == 2) {
+            $aktif = Surat::with('mahasiswa')
+                ->where('jenis_surat', 'Aktif')
+                ->whereHas('mahasiswa', function ($query) use ($prodiId) {
+                    $query->where('prodi_idProdi', $prodiId);
+                })->get();
+
+            $pengantar = Surat::with('mahasiswa')
+                ->where('jenis_surat', 'Pengantar')
+                ->whereHas('mahasiswa', function ($query) use ($prodiId) {
+                    $query->where('prodi_idProdi', $prodiId);
+                })->get();
+
+            $lulus = Surat::with('mahasiswa')
+                ->where('jenis_surat', 'Lulus')
+                ->whereHas('mahasiswa', function ($query) use ($prodiId) {
+                    $query->where('prodi_idProdi', $prodiId);
+                })->get();
+
+            $laporan = Surat::with('mahasiswa')
+                ->where('jenis_surat', 'Laporan')
+                ->whereHas('mahasiswa', function ($query) use ($prodiId) {
+                    $query->where('prodi_idProdi', $prodiId);
+                })->get();
+
             return view('kaprodi.surat.index', compact('aktif', 'pengantar', 'lulus', 'laporan'));
+        } elseif ($user->role_idRole == 3) {
+            $aktif = Surat::with('mahasiswa')
+                ->where('jenis_surat', 'Aktif')
+                ->whereIn('status_surat', ['Disetujui', 'Selesai'])
+                ->whereHas('mahasiswa', function ($query) use ($prodiId) {
+                    $query->where('prodi_idProdi', $prodiId);
+                })->get();
+
+            $pengantar = Surat::with('mahasiswa')
+                ->where('jenis_surat', 'Pengantar')
+                ->whereIn('status_surat', ['Disetujui', 'Selesai'])
+                ->whereHas('mahasiswa', function ($query) use ($prodiId) {
+                    $query->where('prodi_idProdi', $prodiId);
+                })->get();
+
+            $lulus = Surat::with('mahasiswa')
+                ->where('jenis_surat', 'Lulus')
+                ->whereIn('status_surat', ['Disetujui', 'Selesai'])
+                ->whereHas('mahasiswa', function ($query) use ($prodiId) {
+                    $query->where('prodi_idProdi', $prodiId);
+                })->get();
+
+            $laporan = Surat::with('mahasiswa')
+                ->where('jenis_surat', 'Laporan')
+                ->whereIn('status_surat', ['Disetujui', 'Selesai'])
+                ->whereHas('mahasiswa', function ($query) use ($prodiId) {
+                    $query->where('prodi_idProdi', $prodiId);
+                })->get();
+
+            return view('tu.surat.index', compact('aktif', 'pengantar', 'lulus', 'laporan'));
         }
     }
-
-    // Menampilkan form pengajuan surat (hanya mahasiswa)
 
     public function show($id)
     {
@@ -51,23 +94,19 @@ class SuratController extends Controller
         return view('surat.create', compact('jenisSurat'));
     }
 
-    // Menyimpan pengajuan surat baru (hanya mahasiswa)
     public function store(Request $request)
     {
-        // Validasi umum
         $validatedData = $request->validate([
             'jenis_surat' => 'required|string',
         ]);
 
-        // Buat array data surat
         $dataSurat = [
             'jenis_surat' => $validatedData['jenis_surat'],
-            'tanggal' => now(),  // Isi tanggal otomatis saat pengajuan
+            'tanggal' => now(),
             'status_surat' => 'Diajukan',
             'users_idUser' => auth()->user()->idUser,
         ];
 
-        // Tambahkan validasi dan data khusus berdasarkan jenis surat
         switch ($validatedData['jenis_surat']) {
             case 'Aktif':
                 $request->validate([
@@ -92,7 +131,7 @@ class SuratController extends Controller
                 break;
 
             case 'Lulus':
-                $dataSurat['tujuan'] = 'Data diambil dari profil mahasiswa';
+                $dataSurat['tujuan'] = null;
                 break;
 
             case 'Laporan':
@@ -103,49 +142,71 @@ class SuratController extends Controller
                 break;
         }
 
-        // Simpan data ke tabel surat
         Surat::create($dataSurat);
 
-        // Redirect dengan pesan sukses
-        return redirect()->route('dashboard')->with('success', 'Surat berhasil diajukan.');
+        return redirect()->route('mahasiswa.surat.index')->with('success', 'Surat berhasil diajukan.');
     }
 
 
-    // Menyetujui atau menolak pengajuan oleh Kaprodi
-    public function updateStatus(Request $request, Surat $surat)
+    public function updateStatus(Request $request, $id)
     {
+        $surat = Surat::findOrFail($id);
+
         if (auth()->user()->role_idRole !== 2) {
             return redirect()->route('surat.index')->with('error', 'Akses ditolak.');
         }
 
-        $request->validate(['status_surat' => 'required']);
-        $surat->update(['status_surat' => $request->status_surat]);
+        $request->validate([
+            'status' => 'required|in:Disetujui,Ditolak',
+            'detail_surat' => 'nullable|string|max:255',
+        ]);
+
+        $surat->status_surat = $request->status;
+
+        // Tambahkan detail_surat hanya jika Ditolak
+        if ($request->status === 'Ditolak') {
+            $surat->detail_surat = $request->input('detail_surat');
+        } else {
+            $surat->detail_surat = null;
+        }
+        $surat->save();
+
         return back()->with('success', 'Status surat diperbarui!');
     }
 
-    // Mengunggah file surat oleh TU
-    public function uploadSurat(Request $request, Surat $surat)
+
+    public function upload(Request $request, $idSurat)
     {
-        if (auth()->user()->role_idRole !== 3 || $surat->status_surat !== 'Disetujui') {
-            return redirect()->route('surat.index')->with('error', 'Akses ditolak atau surat belum disetujui.');
+        $request->validate([
+            'file_surat' => 'required|mimes:pdf|max:10240',
+        ]);
+
+        $surat = Surat::findOrFail($idSurat);
+
+        if ($request->hasFile('file_surat')) {
+            $idUser = $surat->users_idUser ?? 'unknown';
+            $fileName = $idUser . '_' . $surat->idSurat . '_' . $surat->jenis_surat . '.' . $request->file('file_surat')->extension();
+
+            $path = $request->file('file_surat')->storeAs('surat', $fileName, 'public');
+
+            $surat->file_surat = $path;
+            $surat->status_surat = 'Selesai';
+            $surat->save();
         }
 
-        $request->validate(['file_surat' => 'required|file|mimes:pdf']);
-        $path = $request->file('file_surat')->store('surat');
-        $surat->update(['file_surat' => $path, 'status_surat' => 'Selesai']);
-        return back()->with('success', 'Surat berhasil diunggah!');
+        return redirect()->route('tu.surat.index')->with('success', 'File surat berhasil di-upload.');
     }
 
-    // Mengunduh file surat oleh mahasiswa hanya jika status selesai
-    public function downloadSurat(Surat $surat)
+    public function download($id)
     {
-        if (auth()->user()->role_idRole !== 1 || $surat->users_idUser !== auth()->user()->idUser || $surat->status_surat !== 'Selesai') {
-            return back()->with('error', 'Akses ditolak atau surat belum tersedia.');
-        }
+        $surat = Surat::findOrFail($id);
 
-        if (!$surat->file_surat) {
-            return back()->with('error', 'Surat belum tersedia.');
+        $filePath = storage_path('app/public/' . $surat->file_surat);
+
+        if (file_exists($filePath)) {
+            return response()->download($filePath);
+        } else {
+            return back()->with('error', 'File tidak ditemukan.');
         }
-        return Storage::download($surat->file_surat);
     }
 }

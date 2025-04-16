@@ -22,6 +22,7 @@
                     <th scope="col" class="px-6 py-3">Semester</th>
                     <th scope="col" class="px-6 py-3">Keperluan</th>
                     <th scope="col" class="px-6 py-3">Status</th>
+                    <th scope="col" class="px-6 py-3">File</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,8 +41,37 @@
                                 <i class="fas fa-circle text-danger f-10 me-1"></i>
                             @elseif ($surat->status_surat == 'Disetujui')
                                 <i class="fas fa-circle text-success f-10 me-1"></i>
+                            @elseif ($surat->status_surat == 'Selesai')
+                                <i class="fas fa-circle text-primary f-10 me-1"></i>
                             @endif
                             {{ $surat->status_surat }}
+                        </td>
+                        <td>
+                            @if ($surat->status_surat == 'Ditolak')
+                                <button type="button" class="text-dark btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Lihat Alasan Ditolak</button>
+                            @else
+                                @if ($surat->file_surat)
+                                    <a href="{{ asset('storage/' . $surat->file_surat) }}" target="_blank" class="btn btn-success">
+                                        Buka Surat
+                                    </a>
+                                @else
+                                    <span class="text-gray-500 italic">Belum tersedia</span>
+                                @endif
+                            @endif
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Alasan Surat Ditolak</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{ $surat->detail_surat }}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -61,6 +91,7 @@
                     <th scope="col" class="px-6 py-3">Tujuan</th>
                     <th scope="col" class="px-6 py-3">Topik</th>
                     <th scope="col" class="px-6 py-3">Status</th>
+                    <th scope="col" class="px-6 py-3">File</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -80,8 +111,37 @@
                                 <i class="fas fa-circle text-danger f-10 me-1"></i>
                             @elseif ($surat->status_surat == 'Disetujui')
                                 <i class="fas fa-circle text-success f-10 me-1"></i>
+                            @elseif ($surat->status_surat == 'Selesai')
+                                <i class="fas fa-circle text-primary f-10 me-1"></i>
                             @endif
                             {{ $surat->status_surat }}
+                        </td>
+                        <td>
+                            @if ($surat->status_surat == 'Ditolak')
+                                <button type="button" class="text-dark btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Lihat Alasan Ditolak</button>
+                            @else
+                                @if ($surat->file_surat)
+                                    <a href="{{ asset('storage/' . $surat->file_surat) }}" target="_blank" class="btn btn-success">
+                                        Buka Surat
+                                    </a>
+                                @else
+                                    <span class="text-gray-500 italic">Belum tersedia</span>
+                                @endif
+                            @endif
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Alasan Surat Ditolak</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{ $surat->detail_surat }}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -96,6 +156,7 @@
                     <th scope="col" class="px-6 py-3">NRP</th>
                     <th scope="col" class="px-6 py-3">Nama</th>
                     <th scope="col" class="px-6 py-3">Status</th>
+                    <th scope="col" class="px-6 py-3">File</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -111,8 +172,36 @@
                                 <i class="fas fa-circle text-danger f-10 me-1"></i>
                             @elseif ($surat->status_surat == 'Disetujui')
                                 <i class="fas fa-circle text-success f-10 me-1"></i>
+                            @elseif ($surat->status_surat == 'Selesai')
+                                <i class="fas fa-circle text-primary f-10 me-1"></i>
                             @endif
                             {{ $surat->status_surat }}
+                        </td>
+                        <td>
+                            @if ($surat->status_surat == 'Ditolak')
+                                <button type="button" class="text-dark btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Lihat Alasan Ditolak</button>
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Alasan Surat Ditolak</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                {{ $surat->detail_surat }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                @if ($surat->file_surat)
+                                    <a href="{{ asset('storage/' . $surat->file_surat) }}" target="_blank" class="btn btn-success">
+                                        Buka Surat
+                                    </a>
+                                @else
+                                    <span class="text-gray-500 italic">Belum tersedia</span>
+                                @endif
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -128,6 +217,7 @@
                     <th scope="col" class="px-6 py-3">Nama</th>
                     <th scope="col" class="px-6 py-3">Keperluan</th>
                     <th scope="col" class="px-6 py-3">Status</th>
+                    <th scope="col" class="px-6 py-3">File</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -144,8 +234,36 @@
                                 <i class="fas fa-circle text-danger f-10 me-1"></i>
                             @elseif ($surat->status_surat == 'Disetujui')
                                 <i class="fas fa-circle text-success f-10 me-1"></i>
+                            @elseif ($surat->status_surat == 'Selesai')
+                                <i class="fas fa-circle text-primary f-10 me-1"></i>
                             @endif
                             {{ $surat->status_surat }}
+                        </td>
+                        <td>
+                            @if ($surat->status_surat == 'Ditolak')
+                                <button type="button" class="text-dark btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Lihat Alasan Ditolak</button>
+                            @else
+                                @if ($surat->file_surat)
+                                    <a href="{{ asset('storage/' . $surat->file_surat) }}" target="_blank" class="btn btn-success">
+                                        Buka Surat
+                                    </a>
+                                @else
+                                    <span class="text-gray-500 italic">Belum tersedia</span>
+                                @endif
+                            @endif
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Alasan Surat Ditolak</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{ $surat->detail_surat }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

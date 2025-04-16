@@ -18,18 +18,18 @@
                 </div>
 
                 @if (Auth::user()->role_idRole == 3)
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('tu.users.index')" :active="request()->routeIs('tu.users.index')">
-                        {{ __('Users') }}
-                    </x-nav-link>
-                </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('tu.surat.index')" :active="request()->routeIs('tu.surat.index')">
+                            {{ __('Surat') }}
+                        </x-nav-link>
+                    </div>
                 @endif
                 @if(auth()->user()->role_idRole == 2)
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('kaprodi.surat.index')" :active="request()->routeIs('kaprodi.surat.index')">
-                        {{ __('Surat') }}
-                    </x-nav-link>
-                </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('kaprodi.surat.index')" :active="request()->routeIs('kaprodi.surat.index')">
+                            {{ __('Surat') }}
+                        </x-nav-link>
+                    </div>
                 @endif
                 @if(auth()->user()->role_idRole == 1)
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -38,10 +38,15 @@
                         </x-nav-link>
                     </div>
                 @endif
-                @if(auth()->user()->role_idRole == 3)
+                @if(auth()->user()->role_idRole == 4)
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('tu.surat.index')" :active="request()->routeIs('tu.surat.index')">
-                            {{ __('Surat') }}
+                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
+                            {{ __('Users') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('admin.prodi.index')" :active="request()->routeIs('admin.prodi.index')">
+                            {{ __('Program Studi') }}
                         </x-nav-link>
                     </div>
                 @endif

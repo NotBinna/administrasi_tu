@@ -91,13 +91,13 @@
                               Log in
                           </a>
 
-                          @if (Route::has('register'))
-                              <a
-                                  href="{{ route('register') }}"
-                                  class="btn btn-primary">
-                                  Register
-                              </a>
-                          @endif
+{{--                          @if (Route::has('register'))--}}
+{{--                              <a--}}
+{{--                                  href="{{ route('register') }}"--}}
+{{--                                  class="btn btn-primary">--}}
+{{--                                  Register--}}
+{{--                              </a>--}}
+{{--                          @endif--}}
                       @endauth
                   </nav>
               @endif

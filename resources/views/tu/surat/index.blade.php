@@ -38,17 +38,26 @@
                                 <i class="fas fa-circle text-danger f-10 me-1"></i>
                             @elseif ($surat->status_surat == 'Disetujui')
                                 <i class="fas fa-circle text-success f-10 me-1"></i>
+                            @elseif ($surat->status_surat == 'Selesai')
+                                <i class="fas fa-circle text-primary f-10 me-1"></i>
                             @endif
                             {{ $surat->status_surat }}
                         </td>
                         <td>
-                            <input
-                                type="file"
-                                class="form-control"
-                                id="profile_picture"
-                                name="profile_picture"
-                                accept="application/pdf"
-                            />
+                            @if ($surat->file_surat)
+                                <strong>Nama File:</strong> {{ basename($surat->file_surat) }}
+                            @endif
+                            @if (!$surat->file_surat)
+                                <form action="{{ route('tu.surat.upload', $surat->idSurat) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" name="file_surat" id="file_surat" accept="application/pdf" required>
+                                        <button type="submit" class="input-group-text" for="file_surat">
+                                            {{ __('Upload') }}
+                                        </button>
+                                    </div>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -68,6 +77,7 @@
                     <th scope="col" class="px-6 py-3">Tujuan</th>
                     <th scope="col" class="px-6 py-3">Topik</th>
                     <th scope="col" class="px-6 py-3">Status</th>
+                    <th scope="col" class="px-6 py-3">File</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -87,8 +97,26 @@
                                 <i class="fas fa-circle text-danger f-10 me-1"></i>
                             @elseif ($surat->status_surat == 'Disetujui')
                                 <i class="fas fa-circle text-success f-10 me-1"></i>
+                            @elseif ($surat->status_surat == 'Selesai')
+                                <i class="fas fa-circle text-primary f-10 me-1"></i>
                             @endif
                             {{ $surat->status_surat }}
+                        </td>
+                        <td>
+                            @if ($surat->file_surat)
+                                <strong>Nama File:</strong> {{ basename($surat->file_surat) }}
+                            @endif
+                            @if (!$surat->file_surat)
+                                <form action="{{ route('tu.surat.upload', $surat->idSurat) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" name="file_surat" id="file_surat" accept="application/pdf" required>
+                                        <button type="submit" class="input-group-text" for="file_surat">
+                                            {{ __('Upload') }}
+                                        </button>
+                                    </div>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -103,6 +131,7 @@
                     <th scope="col" class="px-6 py-3">NRP</th>
                     <th scope="col" class="px-6 py-3">Nama</th>
                     <th scope="col" class="px-6 py-3">Status</th>
+                    <th scope="col" class="px-6 py-3">File</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -118,8 +147,26 @@
                                 <i class="fas fa-circle text-danger f-10 me-1"></i>
                             @elseif ($surat->status_surat == 'Disetujui')
                                 <i class="fas fa-circle text-success f-10 me-1"></i>
+                            @elseif ($surat->status_surat == 'Selesai')
+                                <i class="fas fa-circle text-primary f-10 me-1"></i>
                             @endif
                             {{ $surat->status_surat }}
+                        </td>
+                        <td>
+                            @if ($surat->file_surat)
+                                <strong>Nama File:</strong> {{ basename($surat->file_surat) }}
+                            @endif
+                            @if (!$surat->file_surat)
+                                <form action="{{ route('tu.surat.upload', $surat->idSurat) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" name="file_surat" id="file_surat" accept="application/pdf" required>
+                                        <button type="submit" class="input-group-text" for="file_surat">
+                                            {{ __('Upload') }}
+                                        </button>
+                                    </div>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -135,6 +182,7 @@
                     <th scope="col" class="px-6 py-3">Nama</th>
                     <th scope="col" class="px-6 py-3">Keperluan</th>
                     <th scope="col" class="px-6 py-3">Status</th>
+                    <th scope="col" class="px-6 py-3">File</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -151,8 +199,26 @@
                                 <i class="fas fa-circle text-danger f-10 me-1"></i>
                             @elseif ($surat->status_surat == 'Disetujui')
                                 <i class="fas fa-circle text-success f-10 me-1"></i>
+                            @elseif ($surat->status_surat == 'Selesai')
+                                <i class="fas fa-circle text-primary f-10 me-1"></i>
                             @endif
                             {{ $surat->status_surat }}
+                        </td>
+                        <td>
+                            @if ($surat->file_surat)
+                                <strong>Nama File:</strong> {{ basename($surat->file_surat) }}
+                            @endif
+                            @if (!$surat->file_surat)
+                                <form action="{{ route('tu.surat.upload', $surat->idSurat) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" name="file_surat" id="file_surat" accept="application/pdf" required>
+                                        <button type="submit" class="input-group-text" for="file_surat">
+                                            {{ __('Upload') }}
+                                        </button>
+                                    </div>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

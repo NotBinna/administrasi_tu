@@ -38,6 +38,8 @@
                                 <i class="fas fa-circle text-danger f-10 me-1"></i>
                             @elseif ($surat->status_surat == 'Disetujui')
                                 <i class="fas fa-circle text-success f-10 me-1"></i>
+                            @elseif ($surat->status_surat == 'Selesai')
+                                <i class="fas fa-circle text-primary f-10 me-1"></i>
                             @endif
                             {{ $surat->status_surat }}
                         </td>
@@ -46,14 +48,39 @@
                                 @csrf
                                 @method('PUT')
                                 <input type="hidden" name="status" value="Disetujui">
-                                <button type="submit" class="btn btn-success" @if($surat->status_surat === 'Disetujui') disabled @endif>Terima</button>
+                                <button type="submit" class="btn btn-success"
+                                        @if(in_array($surat->status_surat, ['Disetujui', 'Selesai'])) disabled @endif>
+                                    Terima
+                                </button>
                             </form>
-                            <form action="{{ route('kaprodi.surat.updateStatus', $surat->idSurat) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="status" value="Ditolak">
-                                <button type="submit" class="btn btn-danger" @if($surat->status_surat === 'Ditolak') disabled @endif>Tolak</button>
-                            </form>
+                            <button type="button" @if(in_array($surat->status_surat, ['Ditolak', 'Selesai'])) disabled @endif class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#tolakModal-{{ $surat->idSurat }}">
+                                Tolak
+                            </button>
+
+                            <div class="modal fade" id="tolakModal-{{ $surat->idSurat }}" tabindex="-1" aria-labelledby="tolakModalLabel-{{ $surat->idSurat }}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form method="POST" action="{{ route('kaprodi.surat.updateStatus', $surat->idSurat) }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="tolakModalLabel-{{ $surat->idSurat }}">Alasan Penolakan</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="hidden" name="status" value="Ditolak">
+                                                <div class="mb-3">
+                                                    <label for="detail_surat_{{ $surat->idSurat }}">Alasan Penolakan</label>
+                                                    <textarea class="form-control" name="detail_surat" id="detail_surat_{{ $surat->idSurat }}" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-danger">Tolak Surat</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -93,6 +120,8 @@
                                 <i class="fas fa-circle text-danger f-10 me-1"></i>
                             @elseif ($surat->status_surat == 'Disetujui')
                                 <i class="fas fa-circle text-success f-10 me-1"></i>
+                            @elseif ($surat->status_surat == 'Selesai')
+                                <i class="fas fa-circle text-primary f-10 me-1"></i>
                             @endif
                             {{ $surat->status_surat }}
                         </td>
@@ -101,14 +130,39 @@
                                 @csrf
                                 @method('PUT')
                                 <input type="hidden" name="status" value="Disetujui">
-                                <button type="submit" class="btn btn-success" @if($surat->status_surat === 'Disetujui') disabled @endif>Terima</button>
+                                <button type="submit" class="btn btn-success"
+                                        @if(in_array($surat->status_surat, ['Disetujui', 'Selesai'])) disabled @endif>
+                                    Terima
+                                </button>
                             </form>
-                            <form action="{{ route('kaprodi.surat.updateStatus', $surat->idSurat) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="status" value="Ditolak">
-                                <button type="submit" class="btn btn-danger" @if($surat->status_surat === 'Ditolak') disabled @endif>Tolak</button>
-                            </form>
+                            <button type="button" @if(in_array($surat->status_surat, ['Ditolak', 'Selesai'])) disabled @endif class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#tolakModal-{{ $surat->idSurat }}">
+                                Tolak
+                            </button>
+
+                            <div class="modal fade" id="tolakModal-{{ $surat->idSurat }}" tabindex="-1" aria-labelledby="tolakModalLabel-{{ $surat->idSurat }}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form method="POST" action="{{ route('kaprodi.surat.updateStatus', $surat->idSurat) }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="tolakModalLabel-{{ $surat->idSurat }}">Alasan Penolakan</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="hidden" name="status" value="Ditolak">
+                                                <div class="mb-3">
+                                                    <label for="detail_surat_{{ $surat->idSurat }}">Alasan Penolakan</label>
+                                                    <textarea class="form-control" name="detail_surat" id="detail_surat_{{ $surat->idSurat }}" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-danger">Tolak Surat</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -139,6 +193,8 @@
                                 <i class="fas fa-circle text-danger f-10 me-1"></i>
                             @elseif ($surat->status_surat == 'Disetujui')
                                 <i class="fas fa-circle text-success f-10 me-1"></i>
+                            @elseif ($surat->status_surat == 'Selesai')
+                                <i class="fas fa-circle text-primary f-10 me-1"></i>
                             @endif
                             {{ $surat->status_surat }}
                         </td>
@@ -147,22 +203,47 @@
                                 @csrf
                                 @method('PUT')
                                 <input type="hidden" name="status" value="Disetujui">
-                                <button type="submit" class="btn btn-success" @if($surat->status_surat === 'Disetujui') disabled @endif>Terima</button>
+                                <button type="submit" class="btn btn-success"
+                                        @if(in_array($surat->status_surat, ['Disetujui', 'Selesai'])) disabled @endif>
+                                    Terima
+                                </button>
                             </form>
-                            <form action="{{ route('kaprodi.surat.updateStatus', $surat->idSurat) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="status" value="Ditolak">
-                                <button type="submit" class="btn btn-danger" @if($surat->status_surat === 'Ditolak') disabled @endif>Tolak</button>
-                            </form>
+                            <button type="button" @if(in_array($surat->status_surat, ['Ditolak', 'Selesai'])) disabled @endif class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#tolakModal-{{ $surat->idSurat }}">
+                                Tolak
+                            </button>
+
+                            <div class="modal fade" id="tolakModal-{{ $surat->idSurat }}" tabindex="-1" aria-labelledby="tolakModalLabel-{{ $surat->idSurat }}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form method="POST" action="{{ route('kaprodi.surat.updateStatus', $surat->idSurat) }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="tolakModalLabel-{{ $surat->idSurat }}">Alasan Penolakan</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="hidden" name="status" value="Ditolak">
+                                                <div class="mb-3">
+                                                    <label for="detail_surat_{{ $surat->idSurat }}">Alasan Penolakan</label>
+                                                    <textarea class="form-control" name="detail_surat" id="detail_surat_{{ $surat->idSurat }}" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-danger">Tolak Surat</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
 
-            <table class="table mb-5">
                 <h4>Surat Laporan Hasil Studi</h4>
+            <table id="tabel-surat" class="table mb-5">
                 <thead>
                 <tr class="bg-gray-400">
                     <th scope="col" class="px-6 py-3">ID</th>
@@ -187,6 +268,8 @@
                                 <i class="fas fa-circle text-danger f-10 me-1"></i>
                             @elseif ($surat->status_surat == 'Disetujui')
                                 <i class="fas fa-circle text-success f-10 me-1"></i>
+                            @elseif ($surat->status_surat == 'Selesai')
+                                <i class="fas fa-circle text-primary f-10 me-1"></i>
                             @endif
                             {{ $surat->status_surat }}
                         </td>
@@ -195,14 +278,39 @@
                                 @csrf
                                 @method('PUT')
                                 <input type="hidden" name="status" value="Disetujui">
-                                <button type="submit" class="btn btn-success" @if($surat->status_surat === 'Disetujui') disabled @endif>Terima</button>
+                                <button type="submit" class="btn btn-success"
+                                        @if(in_array($surat->status_surat, ['Disetujui', 'Selesai'])) disabled @endif>
+                                    Terima
+                                </button>
                             </form>
-                            <form action="{{ route('kaprodi.surat.updateStatus', $surat->idSurat) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="status" value="Ditolak">
-                                <button type="submit" class="btn btn-danger" @if($surat->status_surat === 'Ditolak') disabled @endif>Tolak</button>
-                            </form>
+                            <button type="button" @if(in_array($surat->status_surat, ['Ditolak', 'Selesai'])) disabled @endif class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#tolakModal-{{ $surat->idSurat }}">
+                                Tolak
+                            </button>
+
+                            <div class="modal fade" id="tolakModal-{{ $surat->idSurat }}" tabindex="-1" aria-labelledby="tolakModalLabel-{{ $surat->idSurat }}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form method="POST" action="{{ route('kaprodi.surat.updateStatus', $surat->idSurat) }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="tolakModalLabel-{{ $surat->idSurat }}">Alasan Penolakan</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <input type="hidden" name="status" value="Ditolak">
+                                                <div class="mb-3">
+                                                    <label for="detail_surat_{{ $surat->idSurat }}">Alasan Penolakan</label>
+                                                    <textarea class="form-control" name="detail_surat" id="detail_surat_{{ $surat->idSurat }}" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-danger">Tolak Surat</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

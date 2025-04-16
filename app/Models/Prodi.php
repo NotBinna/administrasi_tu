@@ -12,9 +12,9 @@ class Prodi extends Model
 
     protected $fillable = [
         'nama_prodi',
+        'idProdi',
     ];
 
-    // Relasi ke User
     public function users()
     {
         return $this->hasMany(User::class, 'prodi_idProdi', 'idProdi');

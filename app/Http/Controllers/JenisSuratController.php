@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Surat;
 
-class KaprodiController extends Controller
+class JenisSuratController extends Controller
 {
-
+    //
 }
