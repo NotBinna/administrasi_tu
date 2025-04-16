@@ -48,7 +48,7 @@
                         </td>
                         <td>
                             @if ($surat->status_surat == 'Ditolak')
-                                <button type="button" class="text-dark btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Lihat Alasan Ditolak</button>
+                                <button type="button" class="text-dark btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ $surat->idSurat }}">Lihat Alasan Ditolak</button>
                             @else
                                 @if ($surat->file_surat)
                                     <a href="{{ asset('storage/' . $surat->file_surat) }}" target="_blank" class="btn btn-success">
@@ -58,17 +58,16 @@
                                     <span class="text-gray-500 italic">Belum tersedia</span>
                                 @endif
                             @endif
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="exampleModal-{{ $surat->idSurat }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Alasan Surat Ditolak</h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Alasan Surat Ditolak {{ $surat->detail_surat }}</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body text-dark">
                                             {{ $surat->detail_surat }}
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +117,7 @@
                         </td>
                         <td>
                             @if ($surat->status_surat == 'Ditolak')
-                                <button type="button" class="text-dark btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Lihat Alasan Ditolak</button>
+                                <button type="button" class="text-dark btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ $surat->idSurat }}">Lihat Alasan Ditolak</button>
                             @else
                                 @if ($surat->file_surat)
                                     <a href="{{ asset('storage/' . $surat->file_surat) }}" target="_blank" class="btn btn-success">
@@ -128,17 +127,16 @@
                                     <span class="text-gray-500 italic">Belum tersedia</span>
                                 @endif
                             @endif
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="exampleModal-{{ $surat->idSurat }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Alasan Surat Ditolak</h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Alasan Surat Ditolak {{ $surat->detail_surat }}</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body text-dark">
                                             {{ $surat->detail_surat }}
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -179,20 +177,7 @@
                         </td>
                         <td>
                             @if ($surat->status_surat == 'Ditolak')
-                                <button type="button" class="text-dark btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Lihat Alasan Ditolak</button>
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Alasan Surat Ditolak</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                {{ $surat->detail_surat }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <button type="button" class="text-dark btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ $surat->idSurat }}">Lihat Alasan Ditolak</button>
                             @else
                                 @if ($surat->file_surat)
                                     <a href="{{ asset('storage/' . $surat->file_surat) }}" target="_blank" class="btn btn-success">
@@ -202,6 +187,19 @@
                                     <span class="text-gray-500 italic">Belum tersedia</span>
                                 @endif
                             @endif
+                            <div class="modal fade" id="exampleModal-{{ $surat->idSurat }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Alasan Surat Ditolak {{ $surat->detail_surat }}</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-dark">
+                                            {{ $surat->detail_surat }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -241,7 +239,7 @@
                         </td>
                         <td>
                             @if ($surat->status_surat == 'Ditolak')
-                                <button type="button" class="text-dark btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Lihat Alasan Ditolak</button>
+                                <button type="button" class="text-dark btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ $surat->idSurat }}">Lihat Alasan Ditolak</button>
                             @else
                                 @if ($surat->file_surat)
                                     <a href="{{ asset('storage/' . $surat->file_surat) }}" target="_blank" class="btn btn-success">
@@ -251,14 +249,14 @@
                                     <span class="text-gray-500 italic">Belum tersedia</span>
                                 @endif
                             @endif
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="exampleModal-{{ $surat->idSurat }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Alasan Surat Ditolak</h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Alasan Surat Ditolak {{ $surat->detail_surat }}</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body text-dark">
                                             {{ $surat->detail_surat }}
                                         </div>
                                     </div>
